@@ -1,60 +1,36 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+    <!-- status overlay -->
+    <v-overlay absolute :opacity="0.75" :value="$store.state.error">
+      <v-container fluid="">
+        <v-alert type="warning">
+          An error has occured, please try again later.
+        </v-alert>
+      </v-container>
+    </v-overlay>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
+    <!-- nav -->
+    <Navigation />
 
     <v-main>
-      <HelloWorld/>
+      <!-- report -->
+      <Report v-if="$store.state.accessToken" class="fill-height" />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import Navigation from '@/components/Navigation'
+import Report from '@/components/Report'
 
 export default {
-  name: 'App',
-
   components: {
-    HelloWorld,
+    Navigation,
+    Report,
   },
 
-  data: () => ({
-    //
-  }),
-};
+  created() {
+    this.$store.dispatch('authenticate')
+  },
+}
 </script>
