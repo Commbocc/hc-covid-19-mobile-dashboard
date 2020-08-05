@@ -1,5 +1,5 @@
 module.exports = {
-  "transpileDependencies": [
-    "vuetify"
-  ]
+  transpileDependencies: ['vuetify'],
+  publicPath: '/hc-covid-19-mobile-dashboard/dist/',
+  indexPath: '../index.html',
 }
