@@ -23,7 +23,7 @@ export default new Vuex.Store({
         let {
           data: { accessToken, embedUrl },
         } = await axios.get(
-          `https://hc-powerbi-token-gen.herokuapp.com/${REPORT_ID}`
+          `https://hc-caching-proxy.herokuapp.com/powerbi/${REPORT_ID}`
         )
         commit('setAccessToken', accessToken)
         commit('setEmbedUrl', embedUrl)
